@@ -20,16 +20,22 @@ public class AirportDao {
 	private EntityManager entityManager = JpaUtil.getEntityManager();
 	
 	public void create(Airport airport) {
+		entityManager.getTransaction().begin();
 		entityManager.persist(airport);
+		entityManager.getTransaction().commit();
 	}
 
 	public Airport update(Airport airport) {
-
-		return entityManager.merge(airport);
+		entityManager.getTransaction().begin();
+		Airport ai =  entityManager.merge(airport);
+		entityManager.getTransaction().commit();
+		return ai;
 	}
 
 	public void delete(Airport airport) {
+		entityManager.getTransaction().begin();
 		entityManager.remove(airport);
+		entityManager.getTransaction().commit();
 	}
 
 	public Airport findOne(long id) {
