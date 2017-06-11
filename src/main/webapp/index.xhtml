@@ -3,14 +3,52 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	
+	>
+
 <h:head>
+	<h:outputStylesheet library="css" name="table-style.css" />
 </h:head>
 <h:body>
-	<!-- <h:dataTable value="#{airlineControllerService.getAllAirlines}" var="o">
+
+	<h:form>
+		<h:commandLink action="index?faces-redirect=true">
+			<h:outputText value="backHome"></h:outputText>
+		</h:commandLink>
+	</h:form>
+ 	<br/>
+ 	
+	<h:dataTable value="#{flightService.findAll()}" var="o" id="list"
+		styleClass="order-table" headerClass="order-table-header"
+		rowClasses="order-table-odd-row,order-table-even-row">
 		<h:column>
-			<f:facet name="header">Air</f:facet>#{o.getName()}
-                </h:column>
-	</h:dataTable> -->
+			<f:facet name="header">Flight Number</f:facet>#{o.flightnr}
+		</h:column>
+		<h:column>
+			<f:facet name="header">Airline</f:facet>#{o.airline.name}
+		</h:column>
+		<h:column>
+			<f:facet name="header">Departure DateTimes</f:facet>#{o.departureDate}&nbsp;&nbsp; #{o.departureTime}
+		</h:column>
+		<h:column>
+			<f:facet name="header">Arrival DateTimes</f:facet>#{o.arrivalDate}&nbsp;&nbsp; #{o.arrivalTime}
+		</h:column>
+		<h:column>
+			<f:facet name="header">Origin Airports</f:facet>(#{o.origin.airportcode})#{o.origin.name}
+		</h:column>
+		<h:column>
+			<f:facet name="header">Destination Airports</f:facet>(#{o.destination.airportcode})#{o.destination.name}
+		</h:column>
+		<h:column>
+			<f:facet name="header">Airplane Model</f:facet>#{o.airplane.model}
+		</h:column>
+		<h:column>
+			<f:facet name="header">Airplane Capacity</f:facet>#{o.airplane.capacity}
+		</h:column>
+ 
+	</h:dataTable>
+
+
 </h:body>
 </html>

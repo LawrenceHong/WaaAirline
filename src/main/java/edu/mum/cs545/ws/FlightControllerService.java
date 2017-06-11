@@ -3,6 +3,7 @@ package edu.mum.cs545.ws;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -14,6 +15,8 @@ import javax.ws.rs.core.MediaType;
 import cs545.airline.model.Flight;
 import cs545.airline.service.FlightService;
 
+@Named
+@Path("flights")
 public class FlightControllerService {
 	@Inject
 	private FlightService flightService;
