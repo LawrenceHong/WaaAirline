@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.TemporalType;
 
+import cs545.airline.model.Airline;
 import cs545.airline.model.Flight;
 import edu.mum.gf.workaround.JpaUtil;
 
@@ -35,9 +36,12 @@ public class FlightDao {
 	}
 
 	public void delete(Flight flight) {
-		entityManager.getTransaction().begin();
-		entityManager.remove(flight);
-		entityManager.getTransaction().commit();
+		Airline toremove = entityManager.find(Airline.class, flight.getId());
+		if (toremove != null) {
+			entityManager.getTransaction().begin();
+			entityManager.remove(toremove);
+			entityManager.getTransaction().commit();
+		}
 	}
 
 	public Flight findOne(long id) {

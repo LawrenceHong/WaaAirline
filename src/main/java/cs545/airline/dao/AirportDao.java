@@ -7,6 +7,7 @@ import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import cs545.airline.model.Airline;
 import cs545.airline.model.Airport;
 import edu.mum.gf.workaround.JpaUtil;
 
@@ -33,9 +34,12 @@ public class AirportDao {
 	}
 
 	public void delete(Airport airport) {
-		entityManager.getTransaction().begin();
-		entityManager.remove(airport);
-		entityManager.getTransaction().commit();
+		Airline toremove = entityManager.find(Airline.class, airport.getId());
+		if (toremove != null) {
+			entityManager.getTransaction().begin();
+			entityManager.remove(toremove);
+			entityManager.getTransaction().commit();
+		}
 	}
 
 	public Airport findOne(long id) {

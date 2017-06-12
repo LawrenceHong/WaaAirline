@@ -11,14 +11,12 @@
 	<h:outputStylesheet library="css" name="table-style.css" />
 </h:head>
 <h:body>
-
-	<h:form>
-		<h:commandLink action="index?faces-redirect=true">
-			<h:outputText value="backHome"></h:outputText>
+ 	<h:form>
+		<h:commandLink action="listAirline">
+			<h:outputText value="listAirline"></h:outputText>
 		</h:commandLink>
 	</h:form>
- 	<br/>
- 	
+	
 	<h:dataTable value="#{flightService.findAll()}" var="o" id="list"
 		styleClass="order-table" headerClass="order-table-header"
 		rowClasses="order-table-odd-row,order-table-even-row">
